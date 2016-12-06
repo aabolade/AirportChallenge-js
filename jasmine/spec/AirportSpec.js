@@ -32,6 +32,12 @@ describe("instructing a plane to take off", function() {
       expect(plane.takeOff).toHaveBeenCalled();
   });
 
+  it("removes a plane from the airport when it has taken off", function() {
+    airport.landPlane(plane);
+    airport.takeOffPlane(plane);
+    expect(airport.planes).not.toContain(plane);
+  });
+
 });
 
 });
