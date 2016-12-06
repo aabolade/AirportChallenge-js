@@ -14,12 +14,13 @@ describe("instructing a plane to land", function() {
 
 
   it("lands a plane", function() {
+    airport.weather.stormy = false
     airport.landPlane(plane);
     expect(plane.land).toHaveBeenCalled();
     });
 
   it("stores a plane", function() {
-
+    airport.weather.stormy = false
     airport.landPlane(plane);
     expect(airport.planes).toContain(plane);
   });
@@ -30,6 +31,7 @@ describe("instructing a plane to land", function() {
   })
 
   it("prevents a plane from landing if the airport is full", function() {
+    airport.weather.stormy = false
     airport.landPlane(plane);
     expect(function() {airport.landPlane(plane2)}).toThrow(new Error("Cannot land when the airport is already full"));
   })
@@ -40,11 +42,13 @@ describe("instructing a plane to take off", function() {
 
 
   it("lets a plane take off", function() {
+      airport.weather.stormy = false
       airport.takeOffPlane(plane);
       expect(plane.takeOff).toHaveBeenCalled();
   });
 
   it("removes a plane from the airport when it has taken off", function() {
+    airport.weather.stormy = false
     airport.landPlane(plane);
     airport.takeOffPlane(plane);
     expect(airport.planes).not.toContain(plane);

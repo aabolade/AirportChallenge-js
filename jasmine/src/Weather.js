@@ -1,3 +1,11 @@
 function Weather() {
-  this.stormy = false
+
+}
+
+Weather.prototype.stormy = function() {
+  if (Math.random(1) > 0.3) {
+    return false;
+  } else {
+    return true;
+  }
 }
