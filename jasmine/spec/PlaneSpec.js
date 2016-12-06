@@ -13,4 +13,12 @@ describe("Plane", function() {
     });
 
   });
+
+  describe("plane taking off", function() {
+    it("sets landed to false when the plane has taken off", function() {
+    plane.takeOff();
+    expect(plane.landed).toEqual(false);
+    });
+  });
+
 });
