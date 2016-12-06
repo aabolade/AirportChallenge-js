@@ -7,4 +7,9 @@ Airport.prototype.landPlane = function(plane) {
 
 };
 
+Airport.prototype.takeOffPlane = function(plane) {
+  plane.takeOff();
+  
+}
+
 Airport.prototype.planes = [];
