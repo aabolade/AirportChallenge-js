@@ -10,8 +10,9 @@ beforeEach(function() {
 
 describe("instructing a plane to land", function() {
 
-  it("lands a plane", function() {
 
+
+  it("lands a plane", function() {
     airport.landPlane(plane);
     expect(plane.land).toHaveBeenCalled();
     });
@@ -21,6 +22,11 @@ describe("instructing a plane to land", function() {
     airport.landPlane(plane);
     expect(airport.planes).toContain(plane);
   });
+
+  it("Prevents a plane from landing if the weather is bad", function() {
+    airport.weather.stormy = true
+    expect(function() {airport.landPlane(plane)}).toThrow(new Error("Cannot land in bad weather"));
+  })
 
 });
 

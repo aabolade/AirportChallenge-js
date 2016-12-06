@@ -1,9 +1,16 @@
-function Airport() {}
+function Airport() {
+  this.weather = new Weather()
+}
 
 Airport.prototype.landPlane = function(plane) {
 
- plane.land();
- this.planes.push(plane);
+
+if (this.weather.stormy) {
+  throw new Error("Cannot land in bad weather");
+} else {
+   plane.land();
+   this.planes.push(plane);
+}
 
 };
 
