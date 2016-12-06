@@ -6,6 +6,7 @@ var plane;
 beforeEach(function() {
   plane = jasmine.createSpyObj('plane', ['land','takeOff']);
   airport = new Airport();
+  plane2 = jasmine.createSpyObj('plane', ['land', 'takeOff']);
 })
 
 describe("instructing a plane to land", function() {
@@ -28,6 +29,11 @@ describe("instructing a plane to land", function() {
     expect(function() {airport.landPlane(plane)}).toThrow(new Error("Cannot land in bad weather"));
   })
 
+  it("prevents a plane from landing if the airport is full", function() {
+    airport.landPlane(plane);
+    expect(function() {airport.landPlane(plane2)}).toThrow(new Error("Cannot land when the airport is already full"));
+  })
+
 });
 
 describe("instructing a plane to take off", function() {
@@ -42,6 +48,11 @@ describe("instructing a plane to take off", function() {
     airport.landPlane(plane);
     airport.takeOffPlane(plane);
     expect(airport.planes).not.toContain(plane);
+  });
+
+  it("prevents a plane from taking off if the weather is bad", function() {
+    airport.weather.stormy = true
+    expect(function() {airport.takeOffPlane(plane)}).toThrow(new Error("Cannot take off in bad weather"));
   });
 
 });
